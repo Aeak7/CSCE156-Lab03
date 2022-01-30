@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * Processes DNA data and counts the number of instances that a particular DNA
  * subsequence appears.
@@ -24,7 +26,7 @@ public class DnaAnalysis {
 	 * Loads a DNA string from the {@link #DNA_FILE} and returns it as a string with
 	 * all whitespace removed.
 	 * 
-	 * @return
+	 * @return dna
 	 */
 	public static String loadDnaFromFile() {
 
@@ -51,18 +53,28 @@ public class DnaAnalysis {
 	 * Counts the number of times <code>subSequence</code> appears in the
 	 * {@link #DNA} string
 	 * 
-	 * @return
+	 * @return count - times of subSequence in DNA
 	 */
 	public static int countSubsequences(String subSequence) {
-
-		// TODO: implement
-		return 0;
+		int count = 0;
+		String lowerSub = subSequence.toLowerCase();
+		if(DNA.contains(lowerSub) == true) {
+			count = StringUtils.countMatches(DNA, lowerSub);
+		}
+		else {
+			System.err.println("DNA does not contain the substring");
+		}
+		return count;
 	}
 
 	public static void main(String args[]) {
-
-		String subSequence = null;
-
+		if (args.length != 1) {
+			System.err.println("ERROR: expecting a single subSequuence");
+			System.exit(1);
+		}
+		
+		String subSequence = args[0];
+			
 		int count = countSubsequences(subSequence);
 
 		System.out.println(subSequence + " appears " + count + " times");

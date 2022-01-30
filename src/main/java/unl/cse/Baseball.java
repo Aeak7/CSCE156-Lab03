@@ -1,8 +1,11 @@
 package unl.cse;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Processes a comma-separated value (CSV) file of win/loss data from the 2011
@@ -31,10 +34,28 @@ public class Baseball {
 		// to create team instances and add them to the list.
 		//
 		// Be sure to close the scanner
+		
+		Scanner s = null;
+		try {
+			s = new Scanner(new File(FILE_NAME));
+		} catch (FileNotFoundException e) {
+			throw new RuntimeException(e);
+		}
+		
+		while (s.hasNextLine()) {
+			//s.nextLine();
+			System.out.println(s.nextLine()); //HERE
+			String line = s.nextLine();
+			teams.add(null);
+		}
+		
 		return teams;
 	}
 	
-	//TODO: implement the file output method
+	public static void persistData(List<Team> teams, String outputFileName) {
+		//TODO: implement the file output method
+		//takes teams, outputs to a file
+	}
 	
 	public static void main(String args[]) {
 

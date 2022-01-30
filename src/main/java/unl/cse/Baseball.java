@@ -1,7 +1,11 @@
 package unl.cse;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -12,7 +16,7 @@ import java.util.Scanner;
  * National League MLB season. It sorts the teams (best record to worst) and
  * prints a report to the standard output.
  * 
- * @author cbourke
+ * @author akelly
  *
  */
 public class Baseball {
@@ -24,37 +28,49 @@ public class Baseball {
 	 * specified by {@link #FILE_NAME} and instantiates 
 	 * and returns a list of {@link Team}s.
 	 * 
-	 * @return
+	 * @return teams - ArrayList of teams from csv file
 	 */
 	public static List<Team> loadData() {
-
+		
 		List<Team> teams = new ArrayList<>();
-
-		// TODO: write code to open the file, process it line-by-line
-		// to create team instances and add them to the list.
-		//
-		// Be sure to close the scanner
-		
-		Scanner s = null;
+		String line = "";
 		try {
-			s = new Scanner(new File(FILE_NAME));
+			BufferedReader br = new BufferedReader(new FileReader(FILE_NAME));
+			while ((line = br.readLine()) != null) {
+				String [] values = line.split(",");
+				int wins = Integer.parseInt(values[1]);
+				int losses = Integer.parseInt(values[2]);
+				Team t = new Team(values[0], wins, losses);
+				teams.add(t);
+			}
+			br.close();
 		} catch (FileNotFoundException e) {
-			throw new RuntimeException(e);
-		}
-		
-		while (s.hasNextLine()) {
-			//s.nextLine();
-			System.out.println(s.nextLine()); //HERE
-			String line = s.nextLine();
-			teams.add(null);
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		
 		return teams;
 	}
 	
+	/**
+	 * Writes the given list of teams into the given 
+	 * file {@link outputFileName} to each line
+	 * 
+	 * @param teams
+	 * @param outputFileName
+	 */
 	public static void persistData(List<Team> teams, String outputFileName) {
-		//TODO: implement the file output method
-		//takes teams, outputs to a file
+		try {
+			PrintWriter pw = new PrintWriter(outputFileName);
+			for(Team t : teams) {
+				pw.println(t);
+			}
+			pw.close();
+		}
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static void main(String args[]) {
@@ -73,8 +89,8 @@ public class Baseball {
 			System.out.println(t);
 		}
 		
-		//TODO: call your file output method with the sorted teams
-
+		String outputFile = "data/output.txt";
+		persistData(teams, outputFile);
 	}
 
 }

@@ -9,6 +9,8 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Processes DNA data and counts the number of instances that a particular DNA
  * subsequence appears.
+ * 
+ * @author akelly
  *
  */
 public class DnaAnalysis {

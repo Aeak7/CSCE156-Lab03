@@ -4,11 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import org.apache.commons.lang3.StringUtils;
-
 /**
  * Processes DNA data and counts the number of instances that a particular DNA
  * subsequence appears.
+ * 
+ * @author akelly
  *
  */
 public class DnaAnalysis {
@@ -56,6 +56,7 @@ public class DnaAnalysis {
 	 * @return count - times of subSequence in DNA
 	 */
 	public static int countSubsequences(String subSequence) {
+<<<<<<< HEAD
 		int count = 0;
 		//int apache = 0;
 		int startIndex = 0;
@@ -74,6 +75,22 @@ public class DnaAnalysis {
 		//System.out.println(apache);
 		return count;
 	}
+=======
+        int count = 0;
+        int startIndex = 0;
+        String lowerSub = subSequence.toLowerCase();
+        if(DNA.contains(lowerSub) == true) {
+            while((startIndex = DNA.indexOf(lowerSub, startIndex)) != -1 ) {
+                count++;
+                startIndex++;
+            }
+        }
+        else {
+            System.err.println("DNA does not contain the substring");
+        }
+        return count;
+    }
+>>>>>>> branch 'master' of https://github.com/Aeak7/CSCE156-Lab03
 
 	public static void main(String args[]) {
 		if (args.length != 1) {

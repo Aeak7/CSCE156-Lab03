@@ -57,13 +57,21 @@ public class DnaAnalysis {
 	 */
 	public static int countSubsequences(String subSequence) {
 		int count = 0;
+		//int apache = 0;
+		int startIndex = 0;
 		String lowerSub = subSequence.toLowerCase();
 		if(DNA.contains(lowerSub) == true) {
-			count = StringUtils.countMatches(DNA, lowerSub);
+			//apache = StringUtils.countMatches(DNA, lowerSub);
+			while((startIndex = DNA.indexOf(lowerSub, startIndex)) != -1 ) {
+				//System.out.println("yes");
+				count++;
+				startIndex++;
+			}
 		}
 		else {
 			System.err.println("DNA does not contain the substring");
 		}
+		//System.out.println(apache);
 		return count;
 	}
 

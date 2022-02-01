@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import org.apache.commons.lang3.StringUtils;
-
 /**
  * Processes DNA data and counts the number of instances that a particular DNA
  * subsequence appears.
@@ -59,13 +57,10 @@ public class DnaAnalysis {
 	 */
 	public static int countSubsequences(String subSequence) {
         int count = 0;
-        //int apache = 0;
         int startIndex = 0;
         String lowerSub = subSequence.toLowerCase();
         if(DNA.contains(lowerSub) == true) {
-            //apache = StringUtils.countMatches(DNA, lowerSub);
             while((startIndex = DNA.indexOf(lowerSub, startIndex)) != -1 ) {
-                //System.out.println("yes");
                 count++;
                 startIndex++;
             }
@@ -73,7 +68,6 @@ public class DnaAnalysis {
         else {
             System.err.println("DNA does not contain the substring");
         }
-        //System.out.println(apache);
         return count;
     }
 

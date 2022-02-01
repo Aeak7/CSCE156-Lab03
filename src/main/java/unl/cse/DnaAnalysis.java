@@ -56,26 +56,6 @@ public class DnaAnalysis {
 	 * @return count - times of subSequence in DNA
 	 */
 	public static int countSubsequences(String subSequence) {
-<<<<<<< HEAD
-		int count = 0;
-		//int apache = 0;
-		int startIndex = 0;
-		String lowerSub = subSequence.toLowerCase();
-		if(DNA.contains(lowerSub) == true) {
-			//apache = StringUtils.countMatches(DNA, lowerSub);
-			while((startIndex = DNA.indexOf(lowerSub, startIndex)) != -1 ) {
-				//System.out.println("yes");
-				count++;
-				startIndex++;
-			}
-		}
-		else {
-			System.err.println("DNA does not contain the substring");
-		}
-		//System.out.println(apache);
-		return count;
-	}
-=======
         int count = 0;
         int startIndex = 0;
         String lowerSub = subSequence.toLowerCase();
@@ -90,7 +70,6 @@ public class DnaAnalysis {
         }
         return count;
     }
->>>>>>> branch 'master' of https://github.com/Aeak7/CSCE156-Lab03
 
 	public static void main(String args[]) {
 		if (args.length != 1) {
